@@ -1,6 +1,6 @@
 package projeto.src.main.java.enums;
 
-public enum comando {
+public enum Comando {
     Do,
     Re,
     Mi,
@@ -8,4 +8,5 @@ public enum comando {
     Sol,
     La,
     Si;
+
 }
