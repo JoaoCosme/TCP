@@ -1,8 +1,8 @@
-package projeto.src.main.java.tocador;
+package tocador;
 
 import projeto.src.main.java.enums.Comando;
 
-public interface adptadorMusical {
+public interface AdaptadorMusical {
     void tocarNota(Comando comando);
     void aumentarOitava();
     void reduzirOitava();

@@ -1,4 +1,6 @@
-projeto/src/main/java/orquestrador/Orquestrador.class
-projeto/src/main/java/enums/comando.class
-projeto/src/main/java/Main.class
-projeto/src/main/java/tela/Interface.class
+Main.class
+tela/Interface.class
+projeto/src/main/java/enums/Comando.class
+tocador/AdaptadorMusical.class
+tocador/AdaptadorJfugue.class
+orquestrador/Orquestrador.class
