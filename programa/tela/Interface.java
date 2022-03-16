@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 public class Interface {
 
-	public static void main(String[] args) {
+	public void abrirTela() {
 		
 		String A, c;
 		int x, y;
