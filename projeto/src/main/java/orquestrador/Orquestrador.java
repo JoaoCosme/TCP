@@ -1,6 +1,6 @@
-package programa.orquestrador;
+package projeto.src.main.java.orquestrador;
 
-import programa.tela.Interface;
+import projeto.src.main.java.tela.Interface;
 
 public class Orquestrador {
     public static void orquestrar(){

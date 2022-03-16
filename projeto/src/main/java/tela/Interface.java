@@ -1,4 +1,4 @@
-package programa.tela;
+package projeto.src.main.java.tela;
 
 import javax.swing.JOptionPane;
 
