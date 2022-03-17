@@ -1,17 +1,24 @@
 package tocador;
 
+import enums.Comando;
 import org.jfugue.player.Player;
-import projeto.src.main.java.enums.Comando;
+
+import java.util.List;
 
 
 public class AdaptadorJfugue implements AdaptadorMusical {
+    private final TradutorAdaptador tradutorAdaptador;
+    private final Player player = new Player();
+
+    public AdaptadorJfugue(TradutorAdaptador tradutorAdaptador) {
+        this.tradutorAdaptador = tradutorAdaptador;
+    }
 
 
     @Override
     public void tocarNota(Comando comando) {
-        Player player = new Player();
-        String music = "C4q D4q E4q F4q G4q A4q B4q C4q";
-        player.play(music);
+            final var notaTraduzida = tradutorAdaptador.traduzParaAdapatador(comando);
+            player.play(notaTraduzida);
     }
 
     @Override

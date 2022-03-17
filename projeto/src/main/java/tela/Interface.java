@@ -1,15 +1,17 @@
 package tela;
 
-import projeto.src.main.java.enums.Comando;
-import tocador.AdaptadorMusical;
+import decodificadores.DecodificadorTexto;
+import tocador.ControladorMusical;
 
 import javax.swing.JOptionPane;
 
 public class Interface {
-	private final AdaptadorMusical adaptadorMusical;
+	private final ControladorMusical controladorMusical;
+	private final DecodificadorTexto decodificadorTexto;
 
-	public Interface(final AdaptadorMusical adaptadorMusical) {
-		this.adaptadorMusical = adaptadorMusical;
+	public Interface(final ControladorMusical controladorMusical, DecodificadorTexto decodificador) {
+		this.controladorMusical = controladorMusical;
+		this.decodificadorTexto = decodificador;
 	}
 
 	public void abrirTela() {
@@ -22,7 +24,10 @@ public class Interface {
 		try {
 			
 			x = Integer.parseInt(A);
-			adaptadorMusical.tocarNota(null);
+
+			final var musica = decodificadorTexto.traduzTexto(A);
+
+			controladorMusical.executaMusica(musica);
 
 			JOptionPane.showMessageDialog(null,x,"teste input",JOptionPane.INFORMATION_MESSAGE); 
 			

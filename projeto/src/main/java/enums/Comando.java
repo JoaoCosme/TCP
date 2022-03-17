@@ -1,4 +1,4 @@
-package projeto.src.main.java.enums;
+package enums;
 
 public enum Comando {
     Do,
