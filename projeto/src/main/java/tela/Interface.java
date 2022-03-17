@@ -16,12 +16,13 @@ public class Interface {
 		
 		String A, c;
 		int x, y;
-		
+
 		A = JOptionPane.showInputDialog("Entre um numero: ");
 		
 		try {
 			
 			x = Integer.parseInt(A);
+			adaptadorMusical.tocarNota(null);
 
 			JOptionPane.showMessageDialog(null,x,"teste input",JOptionPane.INFORMATION_MESSAGE); 
 			

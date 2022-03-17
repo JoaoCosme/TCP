@@ -1,6 +1,5 @@
 package tocador;
 
-import org.jfugue.pattern.Pattern;
 import org.jfugue.player.Player;
 import projeto.src.main.java.enums.Comando;
 
