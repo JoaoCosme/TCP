@@ -2,6 +2,7 @@ package tela;
 
 import decodificadores.DecodificadorTexto;
 import entidades.Musica;
+import orquestrador.Orquestrador;
 import tocador.AdaptadorJfugue;
 import tocador.ControladorMusical;
 import tocador.TradutorJfugue;
@@ -10,13 +11,16 @@ import tradutores.TradutorTextoParaComando;
 public class ControladorDeGui extends Interface{
 
     private String texto;
+    private final Orquestrador orquestrador;
 
     public ControladorDeGui() {
+        orquestrador = new Orquestrador();
+    }
 
+    public void executra(){
         this.texto = "";
         this.abrirTela();
         this.monitorDeEvento();
-
     }
 
     private void monitorDeEvento() {
@@ -44,20 +48,9 @@ public class ControladorDeGui extends Interface{
         if(!this.texto.equals(stringVazia)) {
 
 
-            final var tocadorMusica = new AdaptadorJfugue(new TradutorJfugue());
-
-            final var controladorMusical = new ControladorMusical(tocadorMusica);
-
-            final var decodificador = new DecodificadorTexto(new TradutorTextoParaComando());
-
-
             try {
 
-                System.out.println(this.texto);
-
-                Musica musica = decodificador.traduzTexto(this.texto);
-
-                controladorMusical.executaMusica(musica);
+                orquestrador.orquestrar(texto);
 
 
             }catch (Exception e) {
@@ -65,11 +58,7 @@ public class ControladorDeGui extends Interface{
                 //Faz algo
                 System.out.println("Chegou aqui");
 
-            }finally {
-
-
             }
-
         }
     }
 
