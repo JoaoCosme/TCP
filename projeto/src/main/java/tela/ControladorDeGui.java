@@ -1,12 +1,6 @@
 package tela;
 
-import decodificadores.DecodificadorTexto;
-import entidades.Musica;
 import orquestrador.Orquestrador;
-import tocador.AdaptadorJfugue;
-import tocador.ControladorMusical;
-import tocador.TradutorJfugue;
-import tradutores.TradutorTextoParaComando;
 
 public class ControladorDeGui extends Interface{
 
@@ -17,7 +11,7 @@ public class ControladorDeGui extends Interface{
         orquestrador = new Orquestrador();
     }
 
-    public void executra(){
+    public void executa(){
         this.texto = "";
         this.abrirTela();
         this.monitorDeEvento();
