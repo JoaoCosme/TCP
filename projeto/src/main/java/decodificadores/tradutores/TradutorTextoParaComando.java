@@ -67,7 +67,7 @@ public class TradutorTextoParaComando implements TradutorTextoComando{
         return verificaUltimoComando();
     }
 
-    public void setUltimoCaracter(Character ultimoCaracter) {
+    public void defineUltimoCaracter(Character ultimoCaracter) {
         this.ultimoCaracter = ultimoCaracter;
     }
 }

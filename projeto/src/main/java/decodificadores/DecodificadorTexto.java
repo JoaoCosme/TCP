@@ -29,7 +29,7 @@ public class DecodificadorTexto {
     private Function<Character, Comando> paraComando() {
         return character -> {
             final var comando = tradutorTextoComando.traduz(character);
-            tradutorTextoComando.setUltimoCaracter(character);
+            tradutorTextoComando.defineUltimoCaracter(character);
             return comando;
         };
     }

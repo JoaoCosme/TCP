@@ -4,5 +4,5 @@ import enums.Comando;
 
 public interface TradutorTextoComando {
     Comando traduz(Character caracter);
-    void setUltimoCaracter(Character caracter);
+    void defineUltimoCaracter(Character caracter);
 }
