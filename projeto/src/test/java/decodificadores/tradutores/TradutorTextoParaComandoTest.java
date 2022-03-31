@@ -19,25 +19,108 @@ class TradutorTextoParaComandoTest {
     @Test
     void deveTraduzirNotaComum(){
         dadoCaracter('A');
-        quandoTraduzir();
-        entaoComandoE(La);
+        traduzCaracter();
+        entaoComandoTraduzidoE(La);
     }
 
     @Test
     void deveTraduzirLetraNotaMinusculaOndeUltimoComandoEraNota(){
         dadoCaracter('a');
         dadoUltimoCaracter('D');
-        quandoTraduzir();
-        entaoComandoE(Re);
+        traduzCaracter();
+        entaoComandoTraduzidoE(Re);
     }
 
     @Test
     void deveTraduzirLetraNotaMinusculaOndeUltimoComandoNaoEraNota(){
         dadoCaracter('a');
         dadoUltimoCaracter(',');
-        quandoTraduzir();
-        entaoComandoE(Silencio);
+        traduzCaracter();
+        entaoComandoTraduzidoE(Silencio);
     }
+
+    @Test
+    void deveTraduzirEspaco(){
+        dadoCaracter(' ');
+        traduzCaracter();
+        entaoComandoTraduzidoE(Volume);
+    }
+
+    @Test
+    void deveTraduzirExclamacao(){
+        dadoCaracter('!');
+        traduzCaracter();
+        entaoComandoTraduzidoE(Agogo);
+    }
+
+    @Test
+    void traduzVogal(){
+        dadoCaracter('i');
+        traduzCaracter();
+        entaoComandoTraduzidoE(Horpischord);
+    }
+
+    @Test
+    void traduzConsoante(){
+        dadoCaracter('z');
+
+        dadoUltimoCaracter('A');
+        traduzCaracter();
+        entaoComandoTraduzidoE(La);
+
+        dadoUltimoCaracter('f');
+        traduzCaracter();
+        entaoComandoTraduzidoE(Silencio);
+    }
+
+    @Test
+    void traduzNumero(){
+        dadoCaracter('1');
+        traduzCaracter();
+        entaoComandoTraduzidoE(Horpischord);
+    }
+
+    @Test
+    void traduzInterrogacao(){
+        dadoCaracter('?');
+        traduzCaracter();
+        entaoComandoTraduzidoE(AumentaOitava);
+    }
+
+    @Test
+    void traduzNovaLinha(){
+        dadoCaracter('\n');
+        traduzCaracter();
+        entaoComandoTraduzidoE(Bells);
+    }
+
+    @Test
+    void traduzPontoEVirgula(){
+        dadoCaracter(';');
+        traduzCaracter();
+        entaoComandoTraduzidoE(Flute);
+    }
+
+    @Test
+    void traduzVirgula(){
+        dadoCaracter(',');
+        traduzCaracter();
+        entaoComandoTraduzidoE(Organ);
+    }
+
+    @Test
+    void traduzQualquerOutroCaracter(){
+        dadoCaracter('&');
+
+        dadoUltimoCaracter('F');
+        traduzCaracter();
+        entaoComandoTraduzidoE(Fa);
+
+        dadoUltimoCaracter('&');
+        traduzCaracter();
+        entaoComandoTraduzidoE(Silencio);
+    }
+
 
     private void dadoCaracter(final Character caracter){
         caracterATraduzir = caracter;
@@ -47,11 +130,11 @@ class TradutorTextoParaComandoTest {
         tradutorTextoParaComando.defineUltimoCaracter(caracter);
     }
 
-    private void quandoTraduzir(){
+    private void traduzCaracter(){
         comandoTraduzido = tradutorTextoParaComando.traduz(caracterATraduzir);
     }
 
-    private void entaoComandoE(final Comando comando){
+    private void entaoComandoTraduzidoE(final Comando comando){
         assertEquals(comando,comandoTraduzido);
     }
 
