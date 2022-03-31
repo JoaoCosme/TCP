@@ -27,7 +27,11 @@ public class DecodificadorTexto {
     }
 
     private Function<Character, Comando> paraComando() {
-        return tradutorTextoComando::traduz;
+        return character -> {
+            final var comando = tradutorTextoComando.traduz(character);
+            tradutorTextoComando.setUltimoCaracter(character);
+            return comando;
+        };
     }
 
     private List<Character> stringParaLista(String textoATraduzir) {
