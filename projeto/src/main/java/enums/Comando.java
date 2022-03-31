@@ -15,5 +15,5 @@ public enum Comando {
     Bells,
     Flute,
     Organ,
-    Silencio
+    Silencio;
 }
