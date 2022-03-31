@@ -14,5 +14,6 @@ public enum Comando {
     AumentaOitava,
     Bells,
     Flute,
-    Organ
+    Organ,
+    Silencio
 }

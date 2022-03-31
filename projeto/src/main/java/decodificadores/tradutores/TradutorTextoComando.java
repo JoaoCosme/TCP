@@ -1,4 +1,4 @@
-package tradutores;
+package decodificadores.tradutores;
 
 import enums.Comando;
 

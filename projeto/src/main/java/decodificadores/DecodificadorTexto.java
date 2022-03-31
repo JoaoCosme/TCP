@@ -2,7 +2,7 @@ package decodificadores;
 
 import entidades.Musica;
 import enums.Comando;
-import tradutores.TradutorTextoComando;
+import decodificadores.tradutores.TradutorTextoComando;
 
 import java.util.List;
 import java.util.function.Function;
