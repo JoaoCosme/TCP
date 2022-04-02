@@ -62,7 +62,7 @@ public class TradutorTextoParaComando implements TradutorTextoComando{
             return Horpischord;
         }
         if (Character.isDigit(caracter)){
-            return Horpischord;
+            return IncrementaInstrumento;
         }
         return verificaUltimoComando();
     }

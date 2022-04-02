@@ -77,7 +77,7 @@ class TradutorTextoParaComandoTest {
     void traduzNumero(){
         dadoCaracter('1');
         traduzCaracter();
-        entaoComandoTraduzidoE(Horpischord);
+        entaoComandoTraduzidoE(IncrementaInstrumento);
     }
 
     @Test

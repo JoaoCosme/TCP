@@ -15,5 +15,6 @@ public enum Comando {
     Bells,
     Flute,
     Organ,
+    IncrementaInstrumento,
     Silencio;
 }
