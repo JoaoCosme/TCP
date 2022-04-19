@@ -1,14 +1,22 @@
 @startuml classes
 
 class Orquestrador{
-    + orquestrar()
+    - DecodificadorTexto
+    - ControladorMusical
+    + orquestra( String , Boolean)
 }
 
 class ControladorDeGui{
     - estadoGui
     + entraTexto():String
+    + entraArquivo():String
+    + salvarMusica():Boolean
     + abrir()
     + fechar()
+}
+
+class LeitorDeArquivo{
+    + leArquivo(String):String
 }
 
 enum estadoGui{
@@ -27,7 +35,7 @@ interface TradutorTextoComando{
 class TradutorTextoParaComando implements TradutorTextoComando{}
 
 class ControladorMusical{
-    + executaMusica(Musica)
+    + executaMusica(Musica,Boolean)
 }
 
 interface AdaptadorMusical{
@@ -36,6 +44,7 @@ interface AdaptadorMusical{
     + reduzirOitava()
     + aumentarVolume()
     + reduzirVolume()
+    + salvaMusica()
 }
 
 class AdaptadorJFugue implements AdaptadorMusical{
@@ -43,6 +52,10 @@ class AdaptadorJFugue implements AdaptadorMusical{
     - Oitava
     - Volume
     - Instrumento
+}
+
+class JFugueDownloader{
+    + salvarMusica()
 }
 
 interface TradutorAdaptador{
@@ -74,13 +87,24 @@ class Musica{
     - sequenciaDeComandos
 }
 
+class ValidadorDeComando{
+    + eNota(Comando):Boolean
+    + eComandoDeVolume(Comando):Boolean
+    + eComandoDeBPM(Comando):Boolean
+    + eComandoDeOitava(Comando):Boolean
+    + eComandoDeInstrumento(Comando):Boolean
+}
 
-Orquestrador --> DecodificadorTexto
+
+ControladorDeGui --> Orquestrador
+ControladorDeGui --> LeitorDeArquivo
+AdaptadorJFugue --> JFugueDownloader
 Orquestrador --> ControladorMusical
-Orquestrador --> ControladorDeGui
+Orquestrador --> DecodificadorTexto
 DecodificadorTexto --> TradutorTextoComando
 DecodificadorTexto --> Musica
 ControladorMusical --> AdaptadorMusical
+ControladorMusical ..> ValidadorDeComando
 TradutorTextoComando --> Comando
 ControladorDeGui --> estadoGui
 AdaptadorJFugue --> Instrumento

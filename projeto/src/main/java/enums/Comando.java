@@ -7,6 +7,14 @@ public enum Comando {
     Fa,
     Sol,
     La,
-    Si;
-
+    Si,
+    Volume,
+    Agogo,
+    Horpischord,
+    AumentaOitava,
+    Bells,
+    Flute,
+    Organ,
+    IncrementaInstrumento,
+    Silencio;
 }
