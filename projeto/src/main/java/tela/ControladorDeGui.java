@@ -15,16 +15,15 @@ public class ControladorDeGui extends Interface{
         this.texto = "";
         this.abrirTela();
         this.monitorDeEvento();
+        this.monitorDeAnexoDeArquivo();
     }
 
     private void monitorDeEvento() {
-
-        /*
-         Adiciona um monitor de evento de botao
-         Retorna o texto digitado na interface quando o botao é pressionado
-         */
         converterButton.addActionListener(actionEvent -> processaMusica());
+    }
 
+    private void monitorDeAnexoDeArquivo() {
+        anexarArquivo.addActionListener(actionEvent -> abrirFileSystemView());
     }
 
     private void entraTexto() {
