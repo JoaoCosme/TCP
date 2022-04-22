@@ -1,11 +1,10 @@
 package tela;
 
+import leitor.LeitorDeArquivo;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.io.File;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileSystemView;
 
 public class Interface extends JFrame {
 
@@ -16,8 +15,7 @@ public class Interface extends JFrame {
 	protected final String[] instruments;
 	public JButton converterButton;
 	public JButton anexarArquivo;
-	private JFileChooser fileChooser;
-	private File arquivoAnexado;
+	protected LeitorDeArquivo leitor;
 
 	//Dimensoes da tela
 	final int windowWidth = 800;
@@ -26,8 +24,8 @@ public class Interface extends JFrame {
 	public Interface() {
 
 		setLayout(null);
-
 		this.instruments = new String[]{"Violão", "Guitarra", "Bateria", "Piano"};
+		this.leitor = new LeitorDeArquivo();
 
 		setTextArea();
 		setInstrumentsComboBox();
@@ -73,6 +71,10 @@ public class Interface extends JFrame {
 
 	}
 
+	private void atualizaCaminhoDoArquivoTextField(String path) {
+		this.caminhoDoArquivoTextField.setText(path);
+	}
+
 	private void setInstrumentsComboBox( ) {
 
 		this.instrumentsList = new JComboBox<>(this.instruments);
@@ -93,25 +95,14 @@ public class Interface extends JFrame {
 		this.anexarArquivo.setText("Escolher Arquivo");
 	}
 
-	public void abrirFileSystemView() {
+	protected void anexarArquivo() {
+		//Abre o gerenciador para encontrar um arquivo
+		this.leitor.abrirFileSystemView();
 
-		JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-
-		int returnValue = fileChooser.showOpenDialog(null);
-
-		if (returnValue == JFileChooser.APPROVE_OPTION) {
-			File arquivoAnexado = fileChooser.getSelectedFile();
-			this.caminhoDoArquivoTextField.setText(arquivoAnexado.getAbsolutePath());
+		if(this.leitor.getTemArquivo()) {
+			atualizaCaminhoDoArquivoTextField(this.leitor.getCaminhoDoArquivo());
 		}
-
 	}
 
-	public String getCaminhoDoArquivo() {
-		return this.arquivoAnexado.getAbsolutePath();
-	}
-
-	public File getArquivoAnexado() {
-		return this.arquivoAnexado;
-	}
 
 }
