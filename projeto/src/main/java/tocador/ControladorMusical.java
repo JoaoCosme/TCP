@@ -3,6 +3,7 @@ package tocador;
 import decodificadores.validadores.ValidadorDeComando;
 import entidades.Musica;
 import entidades.VisaoDeComando;
+import enums.Comando;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -26,10 +27,13 @@ public class ControladorMusical {
     private Consumer<VisaoDeComando> tocaNota() {
         return visaoDeComando -> {
             final var comando = visaoDeComando.getComando();
-            System.out.println(visaoDeComando.getRepeticoes());
 
             if (validadorDeComando.eNota(comando)){
                 adaptadorMusical.tocarNota(comando,visaoDeComando.getRepeticoes());
+            }
+
+            if (comando == Comando.IncrementaInstrumento){
+                adaptadorMusical.incrementeInstrumento(visaoDeComando.getRepeticoes());
             }
         };
     }

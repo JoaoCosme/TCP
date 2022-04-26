@@ -57,7 +57,7 @@ public class ControladorDeGui extends Interface{
 
                 //Faz algo
                 System.out.println("Chegou aqui");
-
+                e.printStackTrace();
             }
         }
     }

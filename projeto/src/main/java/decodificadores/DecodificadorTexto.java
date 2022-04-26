@@ -6,7 +6,6 @@ import enums.Comando;
 import decodificadores.tradutores.TradutorTextoComando;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.IntFunction;
@@ -23,15 +22,18 @@ public class DecodificadorTexto {
     public Musica traduzTexto(String textoATraduzir){
 
         final var listaDeCaracter = stringParaLista(textoATraduzir).stream();
-//                .map(paraVisaoDeComandoComando())
-//                .collect(toList());
+
 
         final List<VisaoDeComando> listaDeVisaoDeComando = new ArrayList<>();
 
         listaDeCaracter.forEach( caracter -> {
             final var comando = tradutorTextoComando.traduz(caracter);
+            // TODO ajustar definicao de ultimo caracter de acordo com nota ou nao
             tradutorTextoComando.defineUltimoCaracter(caracter);
-                    if (!listaDeVisaoDeComando.isEmpty() && getUltimaVisao(listaDeVisaoDeComando).getComando() == comando){
+            if (comando == Comando.IncrementaInstrumento) {
+                listaDeVisaoDeComando.add(criaIncrementaInstrumento(caracter,comando));
+            }
+            else if (eIgualAUltimaVisao(listaDeVisaoDeComando, comando)){
                 getUltimaVisao(listaDeVisaoDeComando).incRepeticao();
             }else{
                 listaDeVisaoDeComando.add(new VisaoDeComando(comando));
@@ -40,6 +42,20 @@ public class DecodificadorTexto {
         );
 
         return new Musica(listaDeVisaoDeComando);
+    }
+
+    private VisaoDeComando criaIncrementaInstrumento(Character caracter, Comando comando) {
+        final var visaoDeComando = new VisaoDeComando(comando);
+        visaoDeComando.setRepeticoes(Integer.parseInt(caracter.toString()));
+        return visaoDeComando;
+    }
+
+    private boolean eIgualAUltimaVisao(List<VisaoDeComando> listaDeVisaoDeComando, Comando comando) {
+        if (listaDeVisaoDeComando.isEmpty()){
+            return false;
+        }
+        Comando ultimoComando = getUltimaVisao(listaDeVisaoDeComando).getComando();
+        return ultimoComando == comando && ultimoComando != Comando.IncrementaInstrumento;
     }
 
     private VisaoDeComando getUltimaVisao(List<VisaoDeComando> listaDeVisaoDeComando) {
