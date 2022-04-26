@@ -34,13 +34,15 @@ public class ControladorMusical {
                 adaptadorMusical.tocarNota(comando,visaoDeComando.getRepeticoes());
             }
 
-            if (comando == Comando.IncrementaInstrumento){
+            if (validadorDeComando.eComandoDeIncrementaInstrumento(comando)){
                 adaptadorMusical.incrementeInstrumento(visaoDeComando.getRepeticoes());
             }
 
-            if (instrumentos.contains(comando)){
+            if (validadorDeComando.eComandoDeInstrumento(comando)){
                 adaptadorMusical.setInstrumento(comando);
             }
+
+            //adicionar casos de oitava, volume,etc
         };
     }
 
