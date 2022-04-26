@@ -11,6 +11,7 @@ import java.util.List;
 public class AdaptadorJfugue implements AdaptadorMusical {
     private final TradutorAdaptador tradutorAdaptador;
     private final Player player = new Player();
+
     private int currentInstrument = 1;
 
     public AdaptadorJfugue(TradutorAdaptador tradutorAdaptador) {
@@ -62,5 +63,9 @@ public class AdaptadorJfugue implements AdaptadorMusical {
     @Override
     public void incrementeInstrumento(int incremento) {
         this.currentInstrument = currentInstrument+incremento;
+    }
+
+    public void setCurrentInstrument(int novoInstumento) {
+        this.currentInstrument = novoInstumento;
     }
 }
