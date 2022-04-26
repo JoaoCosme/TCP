@@ -26,6 +26,7 @@ public class ControladorMusical {
     private Consumer<VisaoDeComando> tocaNota() {
         return visaoDeComando -> {
             final var comando = visaoDeComando.getComando();
+            System.out.println(visaoDeComando.getRepeticoes());
 
             if (validadorDeComando.eNota(comando)){
                 adaptadorMusical.tocarNota(comando,visaoDeComando.getRepeticoes());

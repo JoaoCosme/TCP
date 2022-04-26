@@ -24,7 +24,9 @@ public class AdaptadorJfugue implements AdaptadorMusical {
     @Override
     public void tocarNota(Comando comando, int repeticoes) {
         final var notaTraduzida = tradutorAdaptador.traduzParaAdapatador(comando);
-        player.play(notaTraduzida);
+        for (int i = 0; i < repeticoes; i++) {
+            player.play(notaTraduzida);
+        }
     }
 
     @Override

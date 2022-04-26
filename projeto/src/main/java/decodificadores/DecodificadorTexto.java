@@ -5,6 +5,8 @@ import entidades.VisaoDeComando;
 import enums.Comando;
 import decodificadores.tradutores.TradutorTextoComando;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.IntFunction;
@@ -20,11 +22,28 @@ public class DecodificadorTexto {
 
     public Musica traduzTexto(String textoATraduzir){
 
-        final var listaDeComandos = stringParaLista(textoATraduzir).stream()
-                .map(paraVisaoDeComandoComando())
-                .collect(toList());
+        final var listaDeCaracter = stringParaLista(textoATraduzir).stream();
+//                .map(paraVisaoDeComandoComando())
+//                .collect(toList());
 
-        return new Musica(listaDeComandos);
+        final List<VisaoDeComando> listaDeVisaoDeComando = new ArrayList<>();
+
+        listaDeCaracter.forEach( caracter -> {
+            final var comando = tradutorTextoComando.traduz(caracter);
+            tradutorTextoComando.defineUltimoCaracter(caracter);
+                    if (!listaDeVisaoDeComando.isEmpty() && getUltimaVisao(listaDeVisaoDeComando).getComando() == comando){
+                getUltimaVisao(listaDeVisaoDeComando).incRepeticao();
+            }else{
+                listaDeVisaoDeComando.add(new VisaoDeComando(comando));
+            }
+        }
+        );
+
+        return new Musica(listaDeVisaoDeComando);
+    }
+
+    private VisaoDeComando getUltimaVisao(List<VisaoDeComando> listaDeVisaoDeComando) {
+        return listaDeVisaoDeComando.get(listaDeVisaoDeComando.size() - 1);
     }
 
     private Function<Character, VisaoDeComando> paraVisaoDeComandoComando() {
