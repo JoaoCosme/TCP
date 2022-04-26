@@ -22,6 +22,12 @@ public class AdaptadorJfugue implements AdaptadorMusical {
     }
 
     @Override
+    public void tocarNota(Comando comando, int repeticoes) {
+        final var notaTraduzida = tradutorAdaptador.traduzParaAdapatador(comando);
+        player.play(notaTraduzida);
+    }
+
+    @Override
     public void aumentarOitava() {
 
     }

@@ -2,12 +2,10 @@ package tocador;
 
 import decodificadores.validadores.ValidadorDeComando;
 import entidades.Musica;
-import enums.Comando;
-import jdk.swing.interop.SwingInterOpUtils;
+import entidades.VisaoDeComando;
 
-import java.util.List;
-
-import static enums.Comando.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class ControladorMusical {
     private final  AdaptadorMusical adaptadorMusical;
@@ -20,13 +18,19 @@ public class ControladorMusical {
     }
 
     public void executaMusica(Musica musica){
-        final var comandos = musica.getSequenciaDeComandos();
+        final var visaoDeComandos = musica.getSequenciaDeVisaoDeComandos();
 
-        comandos.forEach(comando -> {
+        visaoDeComandos.forEach(tocaNota());
+    }
+
+    private Consumer<VisaoDeComando> tocaNota() {
+        return visaoDeComando -> {
+            final var comando = visaoDeComando.getComando();
+
             if (validadorDeComando.eNota(comando)){
-                adaptadorMusical.tocarNota(comando);
+                adaptadorMusical.tocarNota(comando,visaoDeComando.getRepeticoes());
             }
-        });
+        };
     }
 
 }

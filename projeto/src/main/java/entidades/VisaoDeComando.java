@@ -8,6 +8,7 @@ public class VisaoDeComando {
 
     public VisaoDeComando(Comando comando) {
         this.comando = comando;
+        this.repeticoes = 1;
     }
 
     public Comando getComando() {

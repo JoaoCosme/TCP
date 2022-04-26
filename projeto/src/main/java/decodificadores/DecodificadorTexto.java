@@ -1,6 +1,7 @@
 package decodificadores;
 
 import entidades.Musica;
+import entidades.VisaoDeComando;
 import enums.Comando;
 import decodificadores.tradutores.TradutorTextoComando;
 
@@ -20,17 +21,17 @@ public class DecodificadorTexto {
     public Musica traduzTexto(String textoATraduzir){
 
         final var listaDeComandos = stringParaLista(textoATraduzir).stream()
-                .map(paraComando())
+                .map(paraVisaoDeComandoComando())
                 .collect(toList());
 
         return new Musica(listaDeComandos);
     }
 
-    private Function<Character, Comando> paraComando() {
+    private Function<Character, VisaoDeComando> paraVisaoDeComandoComando() {
         return character -> {
             final var comando = tradutorTextoComando.traduz(character);
             tradutorTextoComando.defineUltimoCaracter(character);
-            return comando;
+            return new VisaoDeComando(comando);
         };
     }
 
