@@ -29,8 +29,9 @@ public class TradutorJfugue implements TradutorAdaptador{
                 return "75";
             case Organ:
                 return "20";
+            default:
+                return "";
         }
-        return "";
     }
 
     private String traduzNota(Comando comando) {
