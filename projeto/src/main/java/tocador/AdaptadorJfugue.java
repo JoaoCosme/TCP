@@ -4,10 +4,6 @@ import enums.Comando;
 import org.jfugue.pattern.Pattern;
 import org.jfugue.player.Player;
 
-import javax.sound.midi.Instrument;
-import java.util.List;
-
-
 public class AdaptadorJfugue implements AdaptadorMusical {
     private final TradutorAdaptador tradutorAdaptador;
     private final Player player = new Player();

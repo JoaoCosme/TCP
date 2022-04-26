@@ -28,7 +28,7 @@ public class DecodificadorTexto {
 
         listaDeCaracter.forEach( caracter -> {
             final var comando = tradutorTextoComando.traduz(caracter);
-            // TODO ajustar definicao de ultimo caracter de acordo com nota ou nao
+            // ajustar definicao de ultimo caracter de acordo com nota ou nao
             tradutorTextoComando.defineUltimoCaracter(caracter);
             if (comando == Comando.IncrementaInstrumento) {
                 listaDeVisaoDeComando.add(criaIncrementaInstrumento(caracter,comando));
