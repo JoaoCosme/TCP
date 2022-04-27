@@ -116,4 +116,8 @@ public class Interface extends JFrame {
 	private Predicate<Comando> porInstrumentoSelecionado() {
 		return comando -> comando.name().equals(this.instrumentsList.getSelectedItem());
 	}
+
+	public String getText(){
+		return this.textArea.getText();
+	}
 }
