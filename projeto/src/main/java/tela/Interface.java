@@ -118,6 +118,7 @@ public class Interface extends JFrame {
 	}
 
 	public String getText(){
+		// Adicionar logica de uniao de arquivo com texto
 		return this.textArea.getText();
 	}
 }
