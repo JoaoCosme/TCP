@@ -6,6 +6,7 @@ import leitor.LeitorDeArquivo;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.util.Arrays;
 
 public class Interface extends JFrame {
 
@@ -105,5 +106,8 @@ public class Interface extends JFrame {
 		}
 	}
 
-
+	public Comando getInstrumentoSelecionado(){
+		final var comandos = Comando.values();
+		return Arrays.stream(comandos).distinct().filter(comando -> comando.name().equals(this.instrumentsList.getSelectedItem())).findFirst().orElse(Comando.IncrementaInstrumento);
+	}
 }

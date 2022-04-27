@@ -1,5 +1,8 @@
 package tela;
+import com.sun.tools.jconsole.JConsoleContext;
 import orquestrador.Orquestrador;
+
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class ControladorDeGui extends Interface{
@@ -21,7 +24,7 @@ public class ControladorDeGui extends Interface{
     private void monitorDeEventoConverter() {
         converterButton.addActionListener(actionEvent -> {
             try {
-                processaMusica();
+                processaMusica(actionEvent);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -42,12 +45,10 @@ public class ControladorDeGui extends Interface{
 
     //Pode ser quebrada em outra classe
     //Tirar responsabilidade da GUI de processar o texto
-    private void processaMusica() throws IOException {
-
-        this.entraTexto();
-
+    private void processaMusica(ActionEvent actionEvent) throws IOException {
+        
         if(!this.texto.isBlank()) {
-
+            System.out.println(this.getInstrumentoSelecionado());
             try {
                 orquestrador.orquestrar(texto);
             }catch (Exception e) {
