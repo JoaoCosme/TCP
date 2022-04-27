@@ -46,9 +46,8 @@ public class ControladorDeGui extends Interface{
     //Pode ser quebrada em outra classe
     //Tirar responsabilidade da GUI de processar o texto
     private void processaMusica(ActionEvent actionEvent) throws IOException {
-        
+
         if(!this.texto.isBlank()) {
-            System.out.println(this.getInstrumentoSelecionado());
             try {
                 orquestrador.orquestrar(texto);
             }catch (Exception e) {
