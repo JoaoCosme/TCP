@@ -49,14 +49,8 @@ public class ControladorDeGui extends Interface{
         if(!this.texto.isBlank()) {
 
             try {
-
                 orquestrador.orquestrar(texto);
-
-
             }catch (Exception e) {
-
-                //Faz algo
-                System.out.println("Chegou aqui");
                 e.printStackTrace();
             }
         }

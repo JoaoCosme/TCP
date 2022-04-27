@@ -1,5 +1,6 @@
 package tela;
 
+import enums.Comando;
 import leitor.LeitorDeArquivo;
 
 import javax.swing.*;
@@ -24,7 +25,7 @@ public class Interface extends JFrame {
 	public Interface() {
 
 		setLayout(null);
-		this.instruments = new String[]{"Violão", "Guitarra", "Bateria", "Piano"};
+		this.instruments = new String[]{Comando.Flute.name(),Comando.Agogo.name(),Comando.Organ.name(),Comando.Bells.name()};
 		this.leitor = new LeitorDeArquivo();
 
 		setTextArea();
