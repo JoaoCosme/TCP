@@ -15,7 +15,7 @@ public class DownloaderJfugue {
 
     public static final String EXTENSAO_MIDI = ".midi";
 
-    public void downloadMusica(Pattern musicaABaixar) throws IOException {
+    public static void downloadMusica(Pattern musicaABaixar) throws IOException {
         final var nomeDoArquivo = DownloadPopup.solicitaArquivo();
         final var player = new Player();
         final var sequence = player.getSequence(musicaABaixar);
