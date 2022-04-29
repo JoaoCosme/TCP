@@ -118,7 +118,7 @@ class TradutorTextoParaComandoTest {
         traduzCaracter();
         entaoComandoTraduzidoE(Fa);
 
-        dadoUltimoCaracter('&');
+        dadoUltimoCaracter(',');
         traduzCaracter();
         entaoComandoTraduzidoE(Silencio);
     }
