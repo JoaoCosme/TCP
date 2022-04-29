@@ -7,7 +7,6 @@ public interface AdaptadorMusical {
     void tocarNota(Comando comando);
     void tocarNota(Comando comando,int repeticoes);
     void aumentarOitava();
-    void reduzirOitava();
     void aumentarVolume();
 
     void incrementaInstrumento(int incremento);
