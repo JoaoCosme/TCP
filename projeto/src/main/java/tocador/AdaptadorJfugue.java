@@ -11,12 +11,22 @@ public class AdaptadorJfugue implements AdaptadorMusical {
     private final TradutorAdaptador tradutorAdaptador;
     private final Player player = new Player();
 
-    private int currentInstrument = 1;
+    private int instrumentoAtual = 1;
+    private int volumeAtual;
 
-    private Pattern pattern_criado = new Pattern();
+    private static final int VOLUME_MIN = 30;
+    private static final int VOLUME_MAX = 127;
+
+    private final Pattern pattern_criado = new Pattern();
+
+    private String criaComandoVolume(int volume) {
+        return ":CON(7,"+volume+") ";
+    }
 
     public AdaptadorJfugue(TradutorAdaptador tradutorAdaptador) {
         this.tradutorAdaptador = tradutorAdaptador;
+        this.pattern_criado.add(criaComandoVolume(VOLUME_MIN));
+        this.volumeAtual = VOLUME_MIN;
     }
 
 
@@ -36,7 +46,7 @@ public class AdaptadorJfugue implements AdaptadorMusical {
 
     private Pattern criaPattern(int repeticoes, String notaTraduzida) {
         final var pattern = new Pattern();
-        pattern.setInstrument(this.currentInstrument);
+        pattern.setInstrument(this.instrumentoAtual);
         pattern.add(notaTraduzida, repeticoes);
         this.pattern_criado.add(pattern);
         return pattern;
@@ -49,22 +59,32 @@ public class AdaptadorJfugue implements AdaptadorMusical {
 
     @Override
     public void aumentarVolume() {
+        var novoVolume = this.volumeAtual * 2;
 
+        if (novoVolume > VOLUME_MAX){
+            novoVolume = VOLUME_MIN;
+        }
+
+        this.volumeAtual = novoVolume;
+
+        this.pattern_criado.add(criaComandoVolume(this.volumeAtual));
     }
 
     @Override
     public void incrementaInstrumento(int incremento) {
-        this.currentInstrument = currentInstrument+incremento;
+        this.instrumentoAtual = instrumentoAtual + incremento;
     }
 
     @Override
     public void defineInstrumento(Comando comando) {
-        this.currentInstrument = Integer.parseInt(tradutorAdaptador.traduzParaAdapatador(comando));
+        this.instrumentoAtual = Integer.parseInt(tradutorAdaptador.traduzParaAdapatador(comando));
     }
 
     @Override
     public void limpaMusica() {
+        System.out.println("Limpando musica");
         this.pattern_criado.clear();
+        this.volumeAtual = VOLUME_MIN;
     }
 
     public void salvaMusica(){

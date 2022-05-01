@@ -51,6 +51,10 @@ public class ControladorMusical {
                 adaptadorMusical.defineInstrumento(comando);
             }
 
+            if (validadorDeComando.eComandoDeVolume(comando)){
+                adaptadorMusical.aumentarVolume();
+            }
+
             //adicionar casos de oitava, volume,etc
         };
     }
