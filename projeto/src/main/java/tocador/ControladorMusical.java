@@ -11,7 +11,7 @@ import java.util.function.Consumer;
 public class ControladorMusical {
     private final  AdaptadorMusical adaptadorMusical;
     private final ValidadorDeComando validadorDeComando;
-    private final List<Comando> instrumentos = List.of(Comando.Flute,Comando.Agogo,Comando.Bells,Comando.Organ,Comando.Horpischord);
+    private final List<Comando> instrumentos = List.of(Comando.PanFlute,Comando.Agogo,Comando.TubularBells,Comando.ChurchOrgan,Comando.Harpsichord);
 
 
     public ControladorMusical(AdaptadorMusical adaptadorMusical, ValidadorDeComando validadorDeComando) {
