@@ -11,7 +11,6 @@ import java.util.function.Consumer;
 public class ControladorMusical {
     private final  AdaptadorMusical adaptadorMusical;
     private final ValidadorDeComando validadorDeComando;
-    private final List<Comando> instrumentos = List.of(Comando.PanFlute,Comando.Agogo,Comando.TubularBells,Comando.ChurchOrgan,Comando.Harpsichord);
 
 
     public ControladorMusical(AdaptadorMusical adaptadorMusical, ValidadorDeComando validadorDeComando) {
@@ -22,7 +21,9 @@ public class ControladorMusical {
     public void executaMusica(Musica musica, boolean salvaMusica){
         final var visaoDeComandos = musica.getSequenciaDeVisaoDeComandos();
 
-        visaoDeComandos.forEach(tocaNota());
+        visaoDeComandos.forEach(adicionaComando());
+
+        this.adaptadorMusical.tocaMusica();
 
         if (salvaMusica){
             this.adaptadorMusical.salvaMusica();
@@ -35,12 +36,12 @@ public class ControladorMusical {
         adaptadorMusical.defineInstrumento(comando);
     }
 
-    private Consumer<VisaoDeComando> tocaNota() {
+    private Consumer<VisaoDeComando> adicionaComando() {
         return visaoDeComando -> {
             final var comando = visaoDeComando.getComando();
 
             if (validadorDeComando.eNota(comando)){
-                adaptadorMusical.tocarNota(comando,visaoDeComando.getRepeticoes());
+                adaptadorMusical.adicionaNota(comando,visaoDeComando.getRepeticoes());
             }
 
             if (validadorDeComando.eComandoDeIncrementaInstrumento(comando)){
@@ -55,7 +56,9 @@ public class ControladorMusical {
                 adaptadorMusical.aumentarVolume();
             }
 
-            //adicionar casos de oitava, volume,etc
+            if (validadorDeComando.eComandoDeOitava(comando)){
+                adaptadorMusical.aumentarOitava();
+            }
         };
     }
 

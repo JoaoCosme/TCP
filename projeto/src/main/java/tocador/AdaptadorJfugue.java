@@ -31,20 +31,24 @@ public class AdaptadorJfugue implements AdaptadorMusical {
 
 
     @Override
-    public void tocarNota(Comando comando) {
+    public void adicionaNota(Comando comando) {
             final var notaTraduzida = tradutorAdaptador.traduzParaAdapatador(comando);
-            final var pattern = criaPattern(1,notaTraduzida);
+            final var pattern = incrementaPattern(1,notaTraduzida);
             player.play(pattern);
     }
 
     @Override
-    public void tocarNota(Comando comando, int repeticoes) {
+    public void adicionaNota(Comando comando, int repeticoes) {
         final var notaTraduzida = tradutorAdaptador.traduzParaAdapatador(comando);
-        final var pattern = criaPattern(repeticoes, notaTraduzida);
-        player.play(pattern);
+        incrementaPattern(repeticoes, notaTraduzida);
     }
 
-    private Pattern criaPattern(int repeticoes, String notaTraduzida) {
+    @Override
+    public void tocaMusica() {
+        this.player.play(this.pattern_criado);
+    }
+
+    private Pattern incrementaPattern(int repeticoes, String notaTraduzida) {
         final var pattern = new Pattern();
         pattern.setInstrument(this.instrumentoAtual);
         pattern.add(notaTraduzida, repeticoes);
