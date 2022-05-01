@@ -68,6 +68,7 @@ public class AdaptadorJfugue implements AdaptadorMusical {
         this.volumeAtual = novoVolume;
 
         this.pattern_criado.add(criaComandoVolume(this.volumeAtual));
+        this.player.play(pattern_criado);
     }
 
     @Override
@@ -82,7 +83,6 @@ public class AdaptadorJfugue implements AdaptadorMusical {
 
     @Override
     public void limpaMusica() {
-        System.out.println("Limpando musica");
         this.pattern_criado.clear();
         this.volumeAtual = VOLUME_MIN;
     }
