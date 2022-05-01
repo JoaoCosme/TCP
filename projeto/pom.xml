@@ -23,7 +23,7 @@
                 <artifactId>pitest-maven</artifactId>
                 <version>1.7.3</version>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
