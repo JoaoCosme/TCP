@@ -7,7 +7,7 @@ import javax.swing.border.Border;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 
-public class Interface extends JFrame {
+public abstract class Interface extends JFrame {
 
 	//Componentes da interface
 	private JTextArea textArea;

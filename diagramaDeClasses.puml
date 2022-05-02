@@ -7,22 +7,21 @@ class Orquestrador{
     + definirInstrumento(String)
 }
 
-class ControladorDeGui{
-    - estadoGui
-    + entraTexto():String
-    + entraArquivo():String
-    + salvarMusica():Boolean
-    + abrir()
-    + fechar()
+abstract Interface{
+    +getTexto():String
+    +abrirGerenciadorDeArquivos()
+    -checkBoxMarcada():Boolean
+    -getArquivoDeTexto()
 }
 
 class LeitorDeArquivo{
-    + leArquivo(String):String
+    + getCaminhoDoArquivo():String
+    + getTemArquivo(): Boolean
+    + getConteudoDoArquivo():String
 }
 
-enum estadoGui{
-    + Standby
-    + ProcessandoMusica
+class ControladorDeGui{
+    + executa()
 }
 
 class DecodificadorTexto{
@@ -31,6 +30,7 @@ class DecodificadorTexto{
 
 interface TradutorTextoComando{
     + traduz(String):comando
+    + defineUltimoCaracter(Character );
 }
 
 class TradutorTextoParaComando implements TradutorTextoComando{}
@@ -41,21 +41,22 @@ class ControladorMusical{
 }
 
 interface AdaptadorMusical{
-    + tocarNota(Comando)
+    + adicionaNota(Comando)
+    + adicionaNota(Comando, int)
+    + tocaMusica()
     + aumentarOitava()
-    + reduzirOitava()
     + aumentarVolume()
-    + reduzirVolume()
     + defineInstrumento(Comando)
     + incrementaInstrumento(int)
+    + limpaMusica()
     + salvaMusica()
 }
 
 class AdaptadorJFugue implements AdaptadorMusical{
-    - BPM
-    - Oitava
-    - Volume
-    - Instrumento
+    - instrumentoAtual
+    - volumeAtual
+    - oitavaAtual
+    - patternCriado
 }
 
 class JFugueDownloader{
@@ -70,25 +71,22 @@ class TradutorJFugue implements TradutorAdaptador{
 
 }
 
-enum Instrumento{
-    - bateria
-    - piano
-    - guiatarra
-}
-
 enum Comando{
-    + do
-    + re
-    + mi
-    + fa
-    + sol
-    + la
-    + si
+    + DO
+    + RE
+    + MI
+    + FA
+    + SOL
+    + LA
+    + SI
     ...
 }
 
 class Musica{
     - sequenciaDeVisaoDeComando
+    + getSequenciaDeVisaoDeComandos():List<VisaoDeComando>
+    + setSequenciaDeVisaoDeComandos(List<VisaoDeComando>)
+    + addVisaoDeComando(VisaoDeComando)
 }
 
 class VisaoDeComando{
@@ -106,9 +104,9 @@ class ValidadorDeComando{
     + eComandoDeInstrumento(Comando):Boolean
 }
 
-
+Interface <|-- ControladorDeGui
+Interface -> LeitorDeArquivo
 ControladorDeGui --> Orquestrador
-ControladorDeGui --> LeitorDeArquivo
 AdaptadorJFugue --> JFugueDownloader
 Orquestrador --> ControladorMusical
 Orquestrador --> DecodificadorTexto
@@ -117,8 +115,6 @@ DecodificadorTexto --> Musica
 ControladorMusical --> AdaptadorMusical
 ControladorMusical ..> ValidadorDeComando
 TradutorTextoComando --> Comando
-ControladorDeGui --> estadoGui
-AdaptadorJFugue --> Instrumento
 AdaptadorJFugue --> TradutorAdaptador
 Musica --> VisaoDeComando
 

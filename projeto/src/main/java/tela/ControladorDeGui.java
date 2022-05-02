@@ -73,7 +73,6 @@ public class ControladorDeGui extends Interface{
         setOpcoesComboBox(instrumentos);
     }
 
-    //Passei para controlador de gui pra interface ficar mais reutilizavel
     public Comando getInstrumentoSelecionado(){
         final var comandos = Comando.values();
 
